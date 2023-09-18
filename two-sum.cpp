@@ -32,5 +32,5 @@ public:
         }
         return result;
     }
-    
+
 };

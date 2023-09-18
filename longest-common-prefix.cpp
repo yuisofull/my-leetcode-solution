@@ -3,7 +3,7 @@
 class Solution {
 public:
     string longestCommonPrefix(vector<string>& strs) {
-        
+
         string res="";
         int m=0;
         int wc=99999;
@@ -21,7 +21,7 @@ public:
             bool ok=true;
             for(int j=0;j<strs.size();j++)
             {
-                
+
                 if(strs[j][i]!=best[i])
                 {
                    ok=false;
@@ -32,7 +32,7 @@ public:
                 m++;
             }else
             {
-                
+
                 break;
             }
         }

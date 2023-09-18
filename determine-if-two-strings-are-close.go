@@ -1,37 +1,29 @@
-import "sort"
+// https://leetcode.com/problems/determine-if-two-strings-are-close
 
-// Check if sorted frequency of characters are the same.
-// Check if set of characters are the same
 func closeStrings(word1 string, word2 string) bool {
-    charSet1, charCount1 := getCharSetAndSortedCharCount(word1)
-    charSet2, charCount2 := getCharSetAndSortedCharCount(word2)
-
-    if charSet1 != charSet2 {
+    if len(word1) != len(word2) {
         return false
     }
+    freq1 := make(map[string]int)
+    freq2 := make(map[string]int)
 
-    for i := 0; i < 26; i++ {
-        if charCount1[i] != charCount2[i] {
-            return false
-        }
+    check1 := make(map[string]bool)
+    check2 := make(map[string]bool)
+    for i:=0; i<len(word1); i++ {
+        freq1[string(word1[i])]++
+        freq2[string(word2[i])]++
+        check1[string(word1[i])] = true
+        check2[string(word2[i])] = true
     }
-
-    return true
-}
-
-func getCharSetAndSortedCharCount(word string) (int, []int) {
-    charSet := 0
-    sortedCount := make([]int, 26)
-    for _, c := range word {
-        cidx := int(c - 'a')
-
-        charSet |=  cidx
-        sortedCount[cidx] += 1
+    if !reflect.DeepEqual(check1, check2) {
+        return false
     }
-
-    sort.Slice(sortedCount, func(i, j int) bool {
-        return sortedCount[i] < sortedCount[j]
-    })
-
-    return charSet, sortedCount
-}
+    revFreq1 := make(map[int]int)
+    revFreq2 := make(map[int]int)
+    for _,v := range freq1 {
+        revFreq1[v]++
+    } 
+    for _,v := range freq2 {
+        revFreq2[v]++
+    }
+    return reflect.DeepEqual(revFreq1, revFreq2)
