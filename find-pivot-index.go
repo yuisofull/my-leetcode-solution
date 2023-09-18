@@ -1,0 +1,15 @@
+func pivotIndex(nums []int) int {
+    var l, r int
+    for _, v := range nums {
+        r += v
+    }
+
+    for i, v := range nums {
+        r -= v
+        if r == l {
+            return i
+        }
+        l += v
+    }
+    return -1
+}
